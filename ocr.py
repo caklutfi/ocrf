@@ -22,7 +22,7 @@ api = ocrspace.API()
 # response= requests.get('https://api.ocr.space/parse/imageurl?apikey=K89677753388957&url=http://i.imgur.com/fwxooMv.png')
 # print(response.json())
 # print(response)
-
+data = ''
 
 def ocr_space_file(filename, overlay=False, api_key=apikey, language='eng'):
     """ OCR.space API request with local file.
@@ -50,6 +50,20 @@ def ocr_space_file(filename, overlay=False, api_key=apikey, language='eng'):
     return r.content.decode()
 
 
-test_file = ocr_space_file(filename='bukti transfer/resi (1).jpeg')
+test_file = ocr_space_file(filename='bukti transfer/resi (16).png')
 bersih= test_file.strip()
 pprint(bersih)
+data=bersih
+try:
+
+    rp = data.index('Rp')
+    print(data)
+    print(rp)
+    print(data[rp:rp+9])
+except:
+    rp = data.index('IDR')
+    cleaning = data[rp:]
+    print(cleaning)
+    last = cleaning.index('\\r')
+    print(cleaning[:last])
+
